@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# Mirror-reversal of an image across a vertical axis
+# Preserve exif tags
+# Preserve date time
+
+if [ $# -ne 1 ]; 
+	then echo "illegal number of parameters"
+	exit
+fi
+
+tmpfile=$(mktemp)
+
+convert "$1" -flop $tmpfile
+
+exiftool -addTagsFromFile "$1" $tmpfile
+
+touch -r "$1" $tmpfile
+
+mv $tmpfile "$1"
+#!/bin/sh
+# Mirror-reversal of an image across a vertical axis
+# Preserve exif tags
+# Preserve date time
+
+echo $# arguments 
+if [ $# -ne 1 ]; 
+	then echo "illegal number of parameters"
+	exit
+fi
+
+tmpfile=$(mktemp)
+
+convert "$1" -flop $tmpfile
+
+exiftool -addTagsFromFile "$1" $tmpfile
+
+touch -r "$1" $tmpfile
+
+mv $tmpfile "$1"
