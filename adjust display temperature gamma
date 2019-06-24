@@ -1,0 +1,2 @@
+#!/bin/sh
+redshift -O 2700 -g 0.8
