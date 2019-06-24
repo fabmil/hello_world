@@ -1,0 +1,4 @@
+#!/bin/sh
+# Convert TIF to JPG and resize 50%
+for f in 2019*.tif; do echo $f; convert $f -resize 50% -quality 80 ${f%%.tif}.jpg ; done
+
