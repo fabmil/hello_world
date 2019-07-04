@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Check existence of input argument
+if [ $# -ne 1 ]
+then
+    echo "Usage: $0 filename"
+    exit 1
+fi
+
+REPODIR=$HOME/mycle/md5doc
+INDEXFILE=index.txt
+
+pathname=$1
+md5_and_pathname=`md5sum $1`
+#echo $md5_and_pathname
+md5="${md5_and_pathname:0:32}"
+filename=${pathname##*/}
+md5_pathname="$HOME/mycle/md5doc/""$md5"_"$filename"
+
+# Check if file already exists
+if [ -f "$md5_pathname" ]; then
+  echo "$md5_pathname exist"
+  exit 2
+fi
+
+# File does not exist, create
+cp -i $pathname $md5_pathname
+
+# Add index record
+#echo "$md5_pathname :notag" >> "$REPODIR"/"$INDEXFILE"
+md5_filename="$md5"_"$filename"
+#echo "$md5_pathname :notag" >> "$REPODIR"/"$INDEXFILE"
+echo "$md5_filename" >> "$REPODIR"/"$INDEXFILE"
+#echo "$REPODIR"/"$INDEXFILE"
+
+#echo $pathname
+#echo $md5_pathname
+#echo $filename
+#dir=${pathname%/*}
+#echo $dir
+#echo "~/mycle/md5doc/$filename"
+#echo $md5_pathname
