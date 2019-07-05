@@ -11,7 +11,7 @@ REPODIR=$HOME/mycle/md5doc
 INDEXFILE=index.txt
 
 pathname=$1
-md5_and_pathname=`md5sum $1`
+md5_and_pathname=`md5sum "$1"`
 #echo $md5_and_pathname
 md5="${md5_and_pathname:0:32}"
 filename=${pathname##*/}
@@ -19,12 +19,12 @@ md5_pathname="$HOME/mycle/md5doc/""$md5"_"$filename"
 
 # Check if file already exists
 if [ -f "$md5_pathname" ]; then
-  echo "$md5_pathname exist"
-  exit 2
+    echo "$md5_pathname exist"
+    exit 2
 fi
 
 # File does not exist, create
-cp -i $pathname $md5_pathname
+cp -i "$pathname" "$md5_pathname"
 
 # Add index record
 #echo "$md5_pathname :notag" >> "$REPODIR"/"$INDEXFILE"
